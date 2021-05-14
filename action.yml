@@ -9,6 +9,15 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  maven-repo-server-id:
+    description: 'Maven server id'
+    required: true
+  maven-repo-server-username:
+    description: 'Maven server username'
+    required: true
+  maven-repo-server-password:
+    description: 'Maven server password'
+    required: true
 outputs:
   random-number:
     description: "Random number"
@@ -23,3 +32,7 @@ runs:
       shell: bash
     - run: ${{ github.action_path }}/bump.sh
       shell: bash
+      env:
+        MAVEN_REPO_SERVER_ID: ${{ inputs.maven-repo-server-id }}
+        MAVEN_REPO_SERVER_USERNAME: ${{ inputs.maven-repo-server-username }}
+        MAVEN_REPO_SERVER_PASSWORD: ${{ inputs.maven-repo-server-password }}       
