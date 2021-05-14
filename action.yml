@@ -1,5 +1,9 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Bump maven project version'
+description: 'A GitHub Actions to bump the version of Maven projects'
+author: Dave Xiong
+branding:
+  color: purple
+  icon: git-commit
 inputs:
   who-to-greet:  # id of input
     description: 'Who to greet'
