@@ -1,3 +1,5 @@
+set -e
+
 echo "Goodbye"
 
 echo "hello"
