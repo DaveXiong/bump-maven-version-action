@@ -15,9 +15,12 @@ inputs:
     description: 'Maven server password'
     required: true
 outputs:
-  random-number:
+  new-version:
     description: "new version"
-    value: ${{ steps.bump-version.outputs.version }}
+    value: ${{ steps.bump-version.outputs.new-version }}
+  old-version:
+    description: "new version"
+    value: ${{ steps.bump-version.outputs.old-version }}
 runs:
   using: "composite"
   steps:

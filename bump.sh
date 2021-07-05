@@ -39,4 +39,5 @@ git tag -a $NEW_VERSION -F CHANGELOG.md
 git push
 git push --tags
 
-echo "::set-output name=version::$NEW_VERSION"
+echo "::set-output name=old-version::$CURRENT_VERSION"
+echo "::set-output name=new-version::$NEW_VERSION"
