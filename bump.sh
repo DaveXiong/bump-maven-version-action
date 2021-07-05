@@ -2,13 +2,6 @@
 
 set -e
 
-echo "Goodbye"
-
-echo "hello"
-
-git status
-git log
-
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
@@ -20,9 +13,8 @@ IFS='. ' read -r -a versions <<< "$CURRENT_VERSION"
 VERSION_INC=$((versions[1]%2==1?2:1))
 NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 
-git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -i -E "*" > CHANGELOG.md
+git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -i -E "PLATPO|CIRI|DISEA|TP|GER|BAU" > CHANGELOG.md
 
-echo $CHANGE_LOGS
 echo -e $CURRENT_VERSION"==>"$NEW_VERSION
 
 mvn -s $DIR/settings.xml versions:set -DnewVersion=$NEW_VERSION -DprocessAllModules
@@ -41,3 +33,4 @@ git push --tags
 
 echo "::set-output name=old-version::$CURRENT_VERSION"
 echo "::set-output name=new-version::$NEW_VERSION"
+echo "::set-output name=change-logs::$(< CHANGELOG.md)"

@@ -14,6 +14,10 @@ inputs:
   maven-repo-server-password:
     description: 'Maven server password'
     required: true
+  git-commit-keyword:
+    description: 'commit will be included in the changelogs'
+    required: false
+    default: '*'
 outputs:
   new-version:
     description: "new version"
@@ -21,6 +25,9 @@ outputs:
   old-version:
     description: "new version"
     value: ${{ steps.bump-version.outputs.old-version }}
+  change-logs:
+    description: "change logs for the new version"
+    value: ${{ steps.bump-version.outputs.change-logs }}
 runs:
   using: "composite"
   steps:
@@ -30,4 +37,5 @@ runs:
       env:
         MAVEN_REPO_SERVER_ID: ${{ inputs.maven-repo-server-id }}
         MAVEN_REPO_SERVER_USERNAME: ${{ inputs.maven-repo-server-username }}
-        MAVEN_REPO_SERVER_PASSWORD: ${{ inputs.maven-repo-server-password }}       
+        MAVEN_REPO_SERVER_PASSWORD: ${{ inputs.maven-repo-server-password }}
+        GIT_COMMIT_KEYWORD: ${{ inputs.git-commit-keyword }}    
