@@ -20,7 +20,7 @@ IFS='. ' read -r -a versions <<< "$CURRENT_VERSION"
 VERSION_INC=$((versions[1]%2==1?2:1))
 NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 
-CHANGE_LOGS=`git log --pretty="%s (%an)" $CURRENT_VERSION.. | grep -i -E "*"`
+git log --pretty="%s (%an)" $CURRENT_VERSION.. | grep -i -E "*" > CHANGELOG.md
 
 echo $CHANGE_LOGS
 echo -e $CURRENT_VERSION"==>"$NEW_VERSION
@@ -35,6 +35,6 @@ else
 fi
 git add .
 git commit -m "RELEASE:$NEW_VERSION"
-git tag -a $NEW_VERSION -m $CHANGE_LOGS
+git tag -a $NEW_VERSION -F CHANGELOG.md
 git push
 git push --tags
