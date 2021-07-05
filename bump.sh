@@ -38,3 +38,5 @@ git commit -m "RELEASE:$NEW_VERSION"
 git tag -a $NEW_VERSION -F CHANGELOG.md
 git push
 git push --tags
+
+echo "::set-output name=version::$NEW_VERSION"

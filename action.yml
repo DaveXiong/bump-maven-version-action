@@ -5,10 +5,6 @@ branding:
   color: purple
   icon: git-commit
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
   maven-repo-server-id:
     description: 'Maven server id'
     required: true
@@ -20,17 +16,13 @@ inputs:
     required: true
 outputs:
   random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+    description: "new version"
+    value: ${{ steps.bump-version.outputs.version }}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: ${{ github.action_path }}/bump.sh
+    - id: bump-version
+      run: ${{ github.action_path }}/bump.sh
       shell: bash
       env:
         MAVEN_REPO_SERVER_ID: ${{ inputs.maven-repo-server-id }}
