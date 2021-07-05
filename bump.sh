@@ -20,7 +20,7 @@ IFS='. ' read -r -a versions <<< "$CURRENT_VERSION"
 VERSION_INC=$((versions[1]%2==1?2:1))
 NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 
-CHANGE_LOGS=`git log --pretty="%s (%an)" 1.41.0.. | grep -i -E "*"`
+CHANGE_LOGS=`git log --pretty="%s (%an)" $CURRENT_VERSION.. | grep -i -E "*"`
 
 echo $CHANGE_LOGS
 echo -e $CURRENT_VERSION"==>"$NEW_VERSION
