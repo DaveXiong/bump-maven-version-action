@@ -13,9 +13,10 @@ IFS='. ' read -r -a versions <<< "$CURRENT_VERSION"
 VERSION_INC=$((versions[1]%2==1?2:1))
 NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 
+echo -e $CURRENT_VERSION"==>"$NEW_VERSION
 git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -i -E "PLATPO|CIRI|DISEA|TP|GER|BAU" > CHANGELOG.md
 
-echo -e $CURRENT_VERSION"==>"$NEW_VERSION
+echo $(< CHANGELOG.md)
 
 mvn -s $DIR/settings.xml versions:set -DnewVersion=$NEW_VERSION -DprocessAllModules
 if [ $? -eq 0 ]
