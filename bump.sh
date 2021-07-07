@@ -7,7 +7,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 
 CURRENT_VERSION=`mvn -s $DIR/settings.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
-echo "version:"$CURRENT_VERSION
+echo -e "version:"$CURRENT_VERSION
 
 IFS='. ' read -r -a versions <<< "$CURRENT_VERSION"
 VERSION_INC=$((versions[1]%2==1?2:1))
@@ -16,7 +16,7 @@ NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 echo -e $CURRENT_VERSION"==>"$NEW_VERSION
 git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -i -E "*" > CHANGELOG.md
 
-echo $(< CHANGELOG.md)
+echo -e $(< CHANGELOG.md)
 
 mvn -s $DIR/settings.xml versions:set -DnewVersion=$NEW_VERSION -DprocessAllModules
 if [ $? -eq 0 ]
