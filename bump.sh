@@ -14,7 +14,7 @@ VERSION_INC=$((versions[1]%2==1?2:1))
 NEW_VERSION=${versions[0]}.$[versions[1]+VERSION_INC].0
 
 echo -e $CURRENT_VERSION"==>"$NEW_VERSION
-git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -i -E "*" > CHANGELOG.md
+git log --pretty="* %s (%an)" $CURRENT_VERSION.. | grep -v -e "RELEASE:" > CHANGELOG.md
 
 echo -e $(< CHANGELOG.md)
 
