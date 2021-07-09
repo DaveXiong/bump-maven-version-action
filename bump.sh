@@ -28,7 +28,7 @@ else
 fi
 git add .
 git commit -m "RELEASE:$NEW_VERSION"
-git tag -a $NEW_VERSION -F CHANGELOG.md
+git tag -a $NEW_VERSION -m $NEW_VERSION
 git push
 git push --tags
 
