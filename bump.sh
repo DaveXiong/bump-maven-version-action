@@ -5,6 +5,10 @@ set -e
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+git config user.name $GIT_USERNAME
+
+GIT_REPO="https://$GITHUB_ACTOR:$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+
 
 CURRENT_VERSION=`mvn -s $DIR/settings.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
 echo -e "version:"$CURRENT_VERSION
@@ -27,10 +31,11 @@ else
   exit 1
 fi
 git add .
+
 git commit -m "RELEASE:$NEW_VERSION"
 git tag -a $NEW_VERSION -m $NEW_VERSION
-git push
-git push --tags
+git push $GIT_REPO --follow-tags
+git push $GIT_REPO --tags
 
 echo "::set-output name=old-version::$CURRENT_VERSION"
 echo "::set-output name=new-version::$NEW_VERSION"
