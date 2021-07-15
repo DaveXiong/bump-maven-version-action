@@ -1,0 +1,35 @@
+name: 'Bump maven project version'
+description: 'Bump version in pom.xml and generate changelogs into CHANGELOG.md'
+author: Dave Xiong
+branding:
+  color: purple
+  icon: git-commit
+inputs:
+  git-commit-keyword:
+    description: 'commit will be included in the changelogs'
+    required: false
+    default: '*'
+  git-username:
+    description: 'github username'
+    required: false
+    default: github-actions[bot]
+
+outputs:
+  new-version:
+    description: "new version"
+    value: ${{ steps.bump-version.outputs.new-version }}
+  old-version:
+    description: "new version"
+    value: ${{ steps.bump-version.outputs.old-version }}
+  change-logs:
+    description: "change logs for the new version"
+    value: ${{ steps.bump-version.outputs.change-logs }}
+runs:
+  using: "composite"
+  steps:
+    - id: bump-version
+      run: ${{ github.action_path }}/bump.sh
+      shell: bash
+      env:
+        GIT_COMMIT_KEYWORD: ${{ inputs.git-commit-keyword }}
+        GIT_USERNAME: ${{ inputs.github-username }}
