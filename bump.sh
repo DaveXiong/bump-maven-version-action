@@ -5,7 +5,6 @@ set -e
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-git config --global user.name $GIT_USERNAME
 
 GIT_REPO="https://$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
