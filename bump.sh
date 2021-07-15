@@ -9,6 +9,7 @@ git config --global user.name $GIT_USERNAME
 
 GIT_REPO="https://$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
+echo $GITH_REPO
 
 CURRENT_VERSION=`mvn -s $DIR/settings.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
 echo -e "version:"$CURRENT_VERSION
