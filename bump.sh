@@ -5,9 +5,9 @@ set -e
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-git config user.name $GIT_USERNAME
+git config --global user.name $GIT_USERNAME
 
-GIT_REPO="https://$GITHUB_ACTOR:$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+GIT_REPO="https://$GIT_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
 
 CURRENT_VERSION=`mvn -s $DIR/settings.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
@@ -33,9 +33,17 @@ fi
 git add .
 
 git commit -m "RELEASE:$NEW_VERSION"
-git tag -a $NEW_VERSION -m $NEW_VERSION
-git push $GIT_REPO --follow-tags
-git push $GIT_REPO --tags
+git push $GIT_REPO
+if [ $? -eq 0 ]
+then
+  echo -e "RELEASE:$NEW_VERSION"
+  git tag -a $NEW_VERSION -m $NEW_VERSION
+  git push $GIT_REPO --tags
+else
+  echo -e "Commit version changed into pom.xml failed"
+  exit 1
+fi
+
 
 echo "::set-output name=old-version::$CURRENT_VERSION"
 echo "::set-output name=new-version::$NEW_VERSION"
