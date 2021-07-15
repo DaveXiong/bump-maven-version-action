@@ -18,6 +18,10 @@ inputs:
     description: 'commit will be included in the changelogs'
     required: false
     default: '*'
+  git-username:
+    description: 'github username'
+    required: false
+    default: github-actions[bot]
 
 outputs:
   new-version:
@@ -40,3 +44,4 @@ runs:
         MAVEN_REPO_SERVER_USERNAME: ${{ inputs.maven-repo-server-username }}
         MAVEN_REPO_SERVER_PASSWORD: ${{ inputs.maven-repo-server-password }}
         GIT_COMMIT_KEYWORD: ${{ inputs.git-commit-keyword }}
+        GIT_USERNAME: ${{ inputs.github-username }}

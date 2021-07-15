@@ -5,6 +5,8 @@ set -e
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+git config --global user.name $GIT_USERNAME
+
 CURRENT_VERSION=`mvn -s $DIR/settings.xml org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
 echo -e "version:"$CURRENT_VERSION
 
