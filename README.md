@@ -31,7 +31,7 @@ jobs:
 
       - name: Bump Version
         id: bump
-        uses: console-core/bump-maven-version@develop
+        uses: DaveXiong/bump-maven-version@main
         with:
           git-username: ${{secrets.GIT_BOT_USERNAME}}
 
