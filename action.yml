@@ -32,4 +32,4 @@ runs:
       shell: bash
       env:
         GIT_COMMIT_KEYWORD: ${{ inputs.git-commit-keyword }}
-        GIT_USERNAME: ${{ inputs.github-username }}
+        GIT_USERNAME: ${{ inputs.git-username }}
