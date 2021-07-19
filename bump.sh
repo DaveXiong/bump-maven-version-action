@@ -30,6 +30,7 @@ fi
 git add .
 
 git commit -m "RELEASE:$NEW_VERSION"
+git pull
 git push
 if [ $? -eq 0 ]
 then
