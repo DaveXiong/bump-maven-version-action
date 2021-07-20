@@ -7,6 +7,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 git config --global user.name $GIT_USERNAME
 
+echo -e `Release on branch:$GIT_BRANCH`
+
+git checkout -b develop origin/$GIT_BRANCH
+
+git branch
+git log -1
+
 CURRENT_VERSION=`mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout`
 echo -e "version:"$CURRENT_VERSION
 
@@ -30,7 +37,6 @@ fi
 git add .
 
 git commit -m "RELEASE:$NEW_VERSION"
-git pull
 git push
 if [ $? -eq 0 ]
 then

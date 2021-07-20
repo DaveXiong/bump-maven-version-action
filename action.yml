@@ -13,6 +13,10 @@ inputs:
     description: 'github username'
     required: false
     default: github-actions[bot]
+  git-branch:
+    description: 'github branch'
+    required: false
+    default: develop
 
 outputs:
   new-version:
@@ -33,3 +37,4 @@ runs:
       env:
         GIT_COMMIT_KEYWORD: ${{ inputs.git-commit-keyword }}
         GIT_USERNAME: ${{ inputs.git-username }}
+        GIT_BRANCH: ${{ inputs.git-branch }}
