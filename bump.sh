@@ -7,9 +7,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 git config --global user.name $GIT_USERNAME
 
-echo -e `Release on branch:$GIT_BRANCH`
+echo -e 'Release on branch:$GIT_BRANCH'
 
-git checkout -b develop origin/$GIT_BRANCH
+git branch
+git log -1
+
+git checkout $GIT_BRANCH
 
 git branch
 git log -1
