@@ -5,7 +5,7 @@ set -e
 # Script full path
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-git config --global user.name $GIT_USERNAME
+git config --system user.name $GIT_USERNAME
 
 echo -e 'Release on branch:$GIT_BRANCH'
 
